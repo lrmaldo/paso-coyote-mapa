@@ -168,6 +168,62 @@
     vertical-align: -1px;
     border: 1px solid rgba(0, 0, 0, 0.3);
   }
+
+  /* Panel de resumen de red */
+  .summary {
+    background: #fff;
+    padding: 8px 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    font-size: 11px;
+    max-width: 300px;
+    max-height: 48vh;
+    overflow: auto;
+  }
+  .summary h4 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+  }
+  .summary.collapsed .sum-body {
+    display: none;
+  }
+  .summary table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .summary th,
+  .summary td {
+    padding: 2px 5px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  .summary th {
+    font-weight: 600;
+    color: #555;
+    white-space: nowrap;
+  }
+  .summary td.num {
+    text-align: right;
+    white-space: nowrap;
+  }
+  .summary td.area {
+    color: #444;
+  }
+  .summary .totals {
+    margin-top: 7px;
+    line-height: 1.6;
+    color: #333;
+  }
+  .summary .totals b {
+    color: #1f2933;
+  }
 </style>
 
 <div id="toolbar">
@@ -381,6 +437,7 @@
       p.tipo = wrap.querySelector(".f-tipo").value;
       applyStyle(layer);
       refreshLabel(layer);
+      updateCount();
       layer.closePopup();
     });
 
@@ -399,7 +456,10 @@
     layer.bindPopup(() => buildForm(layer));
     layer.on("click", () => layer.openPopup());
     // Recalcular etiqueta/longitud tras editar la geometría.
-    layer.on("pm:edit pm:dragend", () => refreshLabel(layer));
+    layer.on("pm:edit pm:dragend", () => {
+      refreshLabel(layer);
+      updateCount();
+    });
     updateCount();
   }
 
@@ -547,6 +607,98 @@
   legend.addTo(map);
 
   // ---------------------------------------------------------------------------
+  // Panel de resumen de red (Puerto / Zona / NAPs / Área / Ramal)
+  // ---------------------------------------------------------------------------
+  let summaryDiv = null;
+  let summaryCollapsed = false;
+  const summary = L.control({ position: "bottomleft" });
+  summary.onAdd = function () {
+    summaryDiv = L.DomUtil.create("div", "summary");
+    L.DomEvent.disableClickPropagation(summaryDiv);
+    L.DomEvent.disableScrollPropagation(summaryDiv);
+    return summaryDiv;
+  };
+  summary.addTo(map);
+
+  function updateSummary() {
+    if (!summaryDiv) return;
+    const zones = {}; // znum -> { port, area, naps, ramalM }
+    let troncalM = 0,
+      distM = 0,
+      totalNaps = 0;
+
+    featuresLayer.eachLayer((layer) => {
+      const p = layer.feature && layer.feature.properties;
+      if (!p) return;
+      const nm = p.name || "";
+      if (p.tipo === "NAP" && isMarker(layer)) {
+        const m = /Z(\d+)/.exec(nm);
+        const z = m ? m[1] : "?";
+        (zones[z] = zones[z] || { port: "", area: "", naps: 0, ramalM: 0 })
+          .naps++;
+        totalNaps++;
+      } else if (p.tipo === "distribucion" && isLine(layer)) {
+        // "Distribucion P2 -> Zona 5 (noreste ...), ~422 m"
+        let z = "?",
+          area = "";
+        const zm = /Zona\s*(\d+)\s*\((.*)\)\s*,\s*~/.exec(nm);
+        if (zm) {
+          z = zm[1];
+          area = zm[2];
+        } else {
+          const z2 = /Zona\s*(\d+)/.exec(nm);
+          if (z2) z = z2[1];
+        }
+        const pm = /(P\d)\b/.exec(nm);
+        const zz = (zones[z] =
+          zones[z] || { port: "", area: "", naps: 0, ramalM: 0 });
+        if (pm) zz.port = pm[1];
+        if (area) zz.area = area;
+        const L_ = lineLength(layer);
+        zz.ramalM += L_;
+        distM += L_;
+      } else if (p.tipo === "troncal" && isLine(layer)) {
+        troncalM += lineLength(layer);
+      }
+    });
+
+    const znums = Object.keys(zones).sort((a, b) => +a - +b);
+    let rows = "";
+    znums.forEach((z) => {
+      const zz = zones[z];
+      rows += `<tr><td>Z${z}</td><td>${zz.port || "—"}</td><td class="num">${
+        zz.naps
+      }</td><td class="area">${escapeHtml(zz.area || "—")}</td><td class="num">${
+        zz.ramalM ? fmtLength(zz.ramalM) : "—"
+      }</td></tr>`;
+    });
+
+    const cap = totalNaps * 16;
+    summaryDiv.className = "summary" + (summaryCollapsed ? " collapsed" : "");
+    summaryDiv.innerHTML = `
+      <h4>Resumen de red <span class="tg">${
+        summaryCollapsed ? "▸" : "▾"
+      }</span></h4>
+      <div class="sum-body">
+        <table>
+          <thead><tr><th>Zona</th><th>Pto</th><th>NAPs</th><th>Área</th><th>Ramal</th></tr></thead>
+          <tbody>${rows || '<tr><td colspan="5">Sin zonas</td></tr>'}</tbody>
+        </table>
+        <div class="totals">
+          <b>${totalNaps}</b> NAPs · capacidad <b>${cap}</b> clientes<br>
+          Troncal <b>${fmtLength(troncalM)}</b> · Distribución <b>${fmtLength(
+      distM
+    )}</b>
+        </div>
+      </div>`;
+
+    summaryDiv.querySelector("h4").addEventListener("click", () => {
+      summaryCollapsed = !summaryCollapsed;
+      updateSummary();
+    });
+  }
+
+  // ---------------------------------------------------------------------------
   // Contador
   // ---------------------------------------------------------------------------
   function updateCount() {
@@ -555,6 +707,7 @@
       if (isMarker(layer) || isLine(layer)) n++;
     });
     document.getElementById("count").textContent = n + " features";
+    updateSummary();
   }
 
   // Arranque
