@@ -4,8 +4,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Troncal 12H (Joachin - Paso Coyote), ~1km",
-        "description": "Ruta sobre la calle real (ya corregida en Earth). Lleva P1 y P2 activos + reservas. El split va en campo, no en la OLT.",
+        "name": "Troncal 12H (Joachin - Paso Coyote), ~1551 m",
+        "description": "Feeder 12H aereo alineado a la carretera Mata Redonda-Joachin (trazo real OSM). Tramo final (~413m) sale de la carretera hasta el empalme de campo; no hay calle mapeada ahi - verificar posteria en sitio. Lleva P1 y P2 activos + reservas.",
         "tipo": "troncal"
       },
       "geometry": {
@@ -16,12 +16,88 @@
             18.62325
           ],
           [
-            -96.3287,
-            18.624
+            -96.330657,
+            18.623231
           ],
           [
-            -96.3255,
-            18.6245
+            -96.3298698,
+            18.6230315
+          ],
+          [
+            -96.3288881,
+            18.6227926
+          ],
+          [
+            -96.3278876,
+            18.6225365
+          ],
+          [
+            -96.3269562,
+            18.6222988
+          ],
+          [
+            -96.3259685,
+            18.6220491
+          ],
+          [
+            -96.3249546,
+            18.6217727
+          ],
+          [
+            -96.3244785,
+            18.6216615
+          ],
+          [
+            -96.3239421,
+            18.6215242
+          ],
+          [
+            -96.3236672,
+            18.621467
+          ],
+          [
+            -96.323358,
+            18.6214092
+          ],
+          [
+            -96.3231488,
+            18.62138
+          ],
+          [
+            -96.3229457,
+            18.6213628
+          ],
+          [
+            -96.3226815,
+            18.6213564
+          ],
+          [
+            -96.3224709,
+            18.6213564
+          ],
+          [
+            -96.3222188,
+            18.6213704
+          ],
+          [
+            -96.3219117,
+            18.6213946
+          ],
+          [
+            -96.3215992,
+            18.6214467
+          ],
+          [
+            -96.3213243,
+            18.621514
+          ],
+          [
+            -96.3209648,
+            18.6216106
+          ],
+          [
+            -96.3206698,
+            18.6217047
           ],
           [
             -96.322,
@@ -49,7 +125,7 @@
       "type": "Feature",
       "properties": {
         "name": "Empalme de reserva -> linea Joachin",
-        "description": "Hilos de reserva corren dentro de la troncal hasta el final y ahi empalman con la linea de Joachin.",
+        "description": "Punto de campo original (no movido). Hilos de reserva empalman aqui con la linea que suministra Joachin.",
         "tipo": "empalme"
       },
       "geometry": {
@@ -64,14 +140,14 @@
       "type": "Feature",
       "properties": {
         "name": "Splitter primario P1 (1:8)",
-        "description": "Splitter 1:8 en cierre aereo sobre la troncal. Alimenta las 8 NAPs del P1 (norte+sur). Deja reserva de hilo.",
+        "description": "Splitter 1:8 en cierre aereo sobre la troncal (nodo real de la carretera). Alimenta las 8 NAPs del P1.",
         "tipo": "splitter"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -96.3287,
-          18.624
+          -96.3288881,
+          18.6227926
         ]
       }
     },
@@ -79,14 +155,14 @@
       "type": "Feature",
       "properties": {
         "name": "Splitter primario P2 (1:8)",
-        "description": "Splitter 1:8 en cierre aereo sobre la troncal. Alimenta las 8 NAPs del P2 (norte+sur). Deja reserva de hilo.",
+        "description": "Splitter 1:8 en cierre aereo sobre la troncal (nodo real de la carretera). Alimenta las 8 NAPs del P2.",
         "tipo": "splitter"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -96.3247,
-          18.62466
+          -96.3259685,
+          18.6220491
         ]
       }
     },
@@ -153,16 +229,16 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Distribucion P1 -> Zona 1 (norte)",
-        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P1 a las 4 NAPs. Largo aprox 326 m.",
+        "name": "Distribucion P1 -> Zona 1 (norte), ~461 m",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P1 a las 4 NAPs de la Zona 1.",
         "tipo": "distribucion"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
           [
-            -96.3287,
-            18.624
+            -96.3288881,
+            18.6227926
           ],
           [
             -96.3284267,
@@ -246,21 +322,13 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Distribucion P1 -> Zona 2 (sur)",
-        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P1 a las 4 NAPs. Largo aprox 619 m.",
+        "name": "Distribucion P1 -> Zona 2 (sur), ~484 m",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P1 a las 4 NAPs de la Zona 2.",
         "tipo": "distribucion"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [
-            -96.3287,
-            18.624
-          ],
-          [
-            -96.3284267,
-            18.6239287
-          ],
           [
             -96.3288881,
             18.6227926
@@ -367,16 +435,20 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Distribucion P2 -> Zona 3 (norte)",
-        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 4 NAPs. Largo aprox 414 m.",
+        "name": "Distribucion P2 -> Zona 3 (norte), ~631 m",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 4 NAPs de la Zona 3.",
         "tipo": "distribucion"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
           [
-            -96.3247,
-            18.62466
+            -96.3259685,
+            18.6220491
+          ],
+          [
+            -96.3256064,
+            18.6228167
           ],
           [
             -96.3251464,
@@ -464,20 +536,16 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Distribucion P2 -> Zona 4 (sur)",
-        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 4 NAPs. Largo aprox 545 m.",
+        "name": "Distribucion P2 -> Zona 4 (sur), ~516 m",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 4 NAPs de la Zona 4.",
         "tipo": "distribucion"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
           [
-            -96.3247,
-            18.62466
-          ],
-          [
-            -96.3251464,
-            18.623836
+            -96.3259685,
+            18.6220491
           ],
           [
             -96.3256064,
