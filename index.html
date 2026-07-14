@@ -1,0 +1,409 @@
+<meta charset="utf-8" />
+<title>Mapa Paso Coyote — Editor GeoJSON</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Leaflet -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<!-- Leaflet-Geoman -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.17.0/dist/leaflet-geoman.css"
+/>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    height: 100%;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  #map {
+    position: absolute;
+    inset: 0;
+    top: 52px;
+  }
+  #toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px;
+    background: #1f2933;
+    color: #fff;
+    z-index: 1000;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  }
+  #toolbar strong {
+    font-size: 15px;
+    margin-right: 6px;
+    white-space: nowrap;
+  }
+  #toolbar button,
+  #toolbar label.btn {
+    background: #3e4c59;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  #toolbar button:hover,
+  #toolbar label.btn:hover {
+    background: #52606d;
+  }
+  #toolbar .spacer {
+    flex: 1;
+  }
+  #toolbar .count {
+    font-size: 12px;
+    opacity: 0.8;
+    white-space: nowrap;
+  }
+  #fileInput {
+    display: none;
+  }
+
+  /* Popup del formulario */
+  .feat-form label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 6px 0 2px;
+    color: #333;
+  }
+  .feat-form input[type="text"],
+  .feat-form textarea,
+  .feat-form select {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 13px;
+    padding: 5px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+  }
+  .feat-form textarea {
+    resize: vertical;
+    min-height: 48px;
+  }
+  .feat-form .row-btns {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .feat-form button {
+    flex: 1;
+    border: 0;
+    border-radius: 4px;
+    padding: 6px 8px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .feat-form .save {
+    background: #2f855a;
+    color: #fff;
+  }
+  .feat-form .del {
+    background: #c53030;
+    color: #fff;
+    flex: 0 0 auto;
+  }
+  .leaflet-popup-content {
+    width: 230px !important;
+    margin: 10px 12px;
+  }
+</style>
+
+<div id="toolbar">
+  <strong>Paso Coyote — Mapa</strong>
+  <label class="btn" for="fileInput">Cargar GeoJSON</label>
+  <input type="file" id="fileInput" accept=".geojson,.json,application/geo+json" />
+  <button id="exportBtn">Exportar GeoJSON</button>
+  <span class="spacer"></span>
+  <span class="count" id="count">0 features</span>
+</div>
+<div id="map"></div>
+
+<!-- Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Leaflet-Geoman -->
+<script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.17.0/dist/leaflet-geoman.min.js"></script>
+
+<script>
+  // ---------------------------------------------------------------------------
+  // Configuración de tipos: cada "tipo" tiene su color de ícono.
+  // ---------------------------------------------------------------------------
+  const TYPES = {
+    OLT:      { label: "OLT",      color: "#c53030" }, // rojo
+    NAP:      { label: "NAP",      color: "#2b6cb0" }, // azul
+    empalme:  { label: "Empalme",  color: "#dd6b20" }, // naranja
+    troncal:  { label: "Troncal",  color: "#6b46c1" }, // morado (líneas)
+    otro:     { label: "Otro",     color: "#718096" }, // gris
+  };
+  const DEFAULT_POINT_TYPE = "otro";
+  const DEFAULT_LINE_TYPE = "troncal";
+
+  // Crea un ícono de marcador SVG con el color del tipo.
+  function makeIcon(color) {
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="38" viewBox="0 0 26 38">
+        <path d="M13 0C6 0 0 5.6 0 12.6 0 22 13 38 13 38s13-16 13-25.4C26 5.6 20 0 13 0z"
+              fill="${color}" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="13" cy="12.5" r="5" fill="#fff"/>
+      </svg>`;
+    return L.divIcon({
+      className: "custom-pin",
+      html: svg,
+      iconSize: [26, 38],
+      iconAnchor: [13, 38],
+      popupAnchor: [0, -34],
+    });
+  }
+  const iconCache = {};
+  function iconForType(tipo) {
+    const t = TYPES[tipo] ? tipo : DEFAULT_POINT_TYPE;
+    if (!iconCache[t]) iconCache[t] = makeIcon(TYPES[t].color);
+    return iconCache[t];
+  }
+  function colorForType(tipo, fallback) {
+    return TYPES[tipo] ? TYPES[tipo].color : TYPES[fallback].color;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Mapa base
+  // ---------------------------------------------------------------------------
+  const map = L.map("map").setView([18.6233, -96.3287], 15);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: "&copy; OpenStreetMap contributors",
+  }).addTo(map);
+
+  // Capa donde viven todas las features editables.
+  const featuresLayer = L.featureGroup().addTo(map);
+
+  // ---------------------------------------------------------------------------
+  // Geoman: controles de dibujo (solo marcador y línea)
+  // ---------------------------------------------------------------------------
+  map.pm.addControls({
+    position: "topleft",
+    drawMarker: true,
+    drawPolyline: true,
+    editMode: true,
+    dragMode: true,
+    removalMode: true,
+    // Deshabilitar el resto de herramientas para mantenerlo simple.
+    drawCircle: false,
+    drawCircleMarker: false,
+    drawPolygon: false,
+    drawRectangle: false,
+    drawText: false,
+    cutPolygon: false,
+    rotateMode: false,
+  });
+  map.pm.setGlobalOptions({ layerGroup: featuresLayer });
+
+  // ---------------------------------------------------------------------------
+  // Propiedades: cada capa guarda su objeto en layer.feature.properties
+  // ---------------------------------------------------------------------------
+  function ensureFeature(layer, defaults) {
+    if (!layer.feature) layer.feature = { type: "Feature", properties: {} };
+    if (!layer.feature.properties) layer.feature.properties = {};
+    const p = layer.feature.properties;
+    if (p.name == null) p.name = defaults.name || "";
+    if (p.description == null) p.description = defaults.description || "";
+    if (p.tipo == null) p.tipo = defaults.tipo;
+    return p;
+  }
+
+  function isLine(layer) {
+    return layer instanceof L.Polyline && !(layer instanceof L.Polygon);
+  }
+  function isMarker(layer) {
+    return layer instanceof L.Marker;
+  }
+
+  // Aplica el estilo visual según el tipo.
+  function applyStyle(layer) {
+    const p = layer.feature.properties;
+    if (isMarker(layer)) {
+      layer.setIcon(iconForType(p.tipo));
+    } else if (isLine(layer)) {
+      layer.setStyle({ color: colorForType(p.tipo, DEFAULT_LINE_TYPE), weight: 4 });
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Formulario en popup
+  // ---------------------------------------------------------------------------
+  function escapeHtml(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function buildForm(layer) {
+    const p = layer.feature.properties;
+    const wrap = document.createElement("div");
+    wrap.className = "feat-form";
+
+    const options = Object.keys(TYPES)
+      .map(
+        (k) =>
+          `<option value="${k}" ${k === p.tipo ? "selected" : ""}>${escapeHtml(
+            TYPES[k].label
+          )}</option>`
+      )
+      .join("");
+
+    wrap.innerHTML = `
+      <label>Tipo</label>
+      <select class="f-tipo">${options}</select>
+      <label>Nombre (name)</label>
+      <input type="text" class="f-name" value="${escapeHtml(p.name)}" />
+      <label>Descripción (description)</label>
+      <textarea class="f-desc">${escapeHtml(p.description)}</textarea>
+      <div class="row-btns">
+        <button class="save" type="button">Guardar</button>
+        <button class="del" type="button" title="Borrar">🗑</button>
+      </div>
+    `;
+
+    wrap.querySelector(".save").addEventListener("click", () => {
+      p.name = wrap.querySelector(".f-name").value;
+      p.description = wrap.querySelector(".f-desc").value;
+      p.tipo = wrap.querySelector(".f-tipo").value;
+      applyStyle(layer);
+      layer.closePopup();
+    });
+
+    wrap.querySelector(".del").addEventListener("click", () => {
+      featuresLayer.removeLayer(layer);
+      updateCount();
+    });
+
+    return wrap;
+  }
+
+  // Conecta popup + estilo a una capa nueva o cargada.
+  function registerLayer(layer, defaults) {
+    ensureFeature(layer, defaults);
+    applyStyle(layer);
+    // Popup construido en el momento de abrir (para reflejar valores actuales).
+    layer.bindPopup(() => buildForm(layer));
+    layer.on("click", () => layer.openPopup());
+    updateCount();
+  }
+
+  // ---------------------------------------------------------------------------
+  // Alta de features dibujadas a mano
+  // ---------------------------------------------------------------------------
+  map.on("pm:create", (e) => {
+    const layer = e.layer;
+    const defaults = isMarker(layer)
+      ? { tipo: DEFAULT_POINT_TYPE }
+      : { tipo: DEFAULT_LINE_TYPE };
+    registerLayer(layer, defaults);
+    layer.openPopup();
+  });
+
+  map.on("pm:remove", updateCount);
+
+  // ---------------------------------------------------------------------------
+  // Cargar GeoJSON desde archivo local
+  // ---------------------------------------------------------------------------
+  document.getElementById("fileInput").addEventListener("change", (ev) => {
+    const file = ev.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result);
+        loadGeoJSON(data);
+      } catch (err) {
+        alert("No se pudo leer el GeoJSON: " + err.message);
+      }
+      ev.target.value = ""; // permite recargar el mismo archivo
+    };
+    reader.readAsText(file);
+  });
+
+  function loadGeoJSON(data) {
+    L.geoJSON(data, {
+      // Puntos como marcadores.
+      pointToLayer: (feature, latlng) => L.marker(latlng),
+      onEachFeature: (feature, layer) => {
+        const gtype = feature.geometry && feature.geometry.type;
+        if (gtype !== "Point" && gtype !== "LineString") return; // solo Point / LineString
+        layer.feature = layer.feature || feature;
+        layer.feature.properties = feature.properties || {};
+        const defaults = isMarker(layer)
+          ? { tipo: DEFAULT_POINT_TYPE }
+          : { tipo: DEFAULT_LINE_TYPE };
+        layer.addTo(featuresLayer);
+        registerLayer(layer, defaults);
+      },
+    });
+    fitToFeatures();
+  }
+
+  function fitToFeatures() {
+    const b = featuresLayer.getBounds();
+    if (b.isValid()) map.fitBounds(b, { padding: [40, 40] });
+  }
+
+  // ---------------------------------------------------------------------------
+  // Exportar GeoJSON (FeatureCollection estándar)
+  // ---------------------------------------------------------------------------
+  document.getElementById("exportBtn").addEventListener("click", () => {
+    const features = [];
+    featuresLayer.eachLayer((layer) => {
+      if (!(isMarker(layer) || isLine(layer))) return;
+      const gj = layer.toGeoJSON(); // ya trae properties desde layer.feature
+      // Limpiar propiedades vacías innecesarias, pero conservar name/description/tipo.
+      const p = layer.feature.properties || {};
+      gj.properties = {
+        name: p.name || "",
+        description: p.description || "",
+        tipo: p.tipo || (isMarker(layer) ? DEFAULT_POINT_TYPE : DEFAULT_LINE_TYPE),
+      };
+      features.push(gj);
+    });
+
+    const fc = { type: "FeatureCollection", features };
+    const blob = new Blob([JSON.stringify(fc, null, 2)], {
+      type: "application/geo+json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "paso-coyote-export.geojson";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  // ---------------------------------------------------------------------------
+  // Contador
+  // ---------------------------------------------------------------------------
+  function updateCount() {
+    let n = 0;
+    featuresLayer.eachLayer((layer) => {
+      if (isMarker(layer) || isLine(layer)) n++;
+    });
+    document.getElementById("count").textContent = n + " features";
+  }
+
+  updateCount();
+</script>
