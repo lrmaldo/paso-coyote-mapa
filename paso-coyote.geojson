@@ -84,7 +84,7 @@
       "type": "Feature",
       "properties": {
         "name": "Splitter primario P1 (1:8)",
-        "description": "Splitter 1:8 en cierre aereo sobre la troncal (vertice real de la ruta de campo). Alimenta las 8 NAPs del P1 (4 al norte + 4 al sur). Deja reserva de hilo.",
+        "description": "Splitter 1:8 en cierre aereo sobre la troncal. Alimenta 8 NAPs: Z1 (4, noroeste) + Z2 (4, suroeste).",
         "tipo": "splitter"
       },
       "geometry": {
@@ -99,7 +99,7 @@
       "type": "Feature",
       "properties": {
         "name": "Splitter primario P2 (1:8)",
-        "description": "Splitter 1:8 en cierre aereo sobre la troncal (vertice real de la ruta de campo). Alimenta las 8 NAPs del P2 (4 al norte + 4 al sur). Deja reserva de hilo.",
+        "description": "Splitter 1:8 en cierre aereo sobre la troncal. Alimenta 8 NAPs: Z3 (3, norte-centro) + Z4 (3, sureste) + Z5 (2, noreste).",
         "tipo": "splitter"
       },
       "geometry": {
@@ -114,7 +114,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z1-A (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado norte de la carretera. Zona 1, P1. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 1 (noroeste), P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -129,7 +129,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z1-B (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado norte de la carretera. Zona 1, P1. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 1 (noroeste), P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -144,7 +144,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z1-C (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado norte de la carretera. Zona 1, P1. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 1 (noroeste), P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -159,7 +159,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z1-D (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado norte de la carretera. Zona 1, P1. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 1 (noroeste), P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -173,8 +173,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Distribucion P1 -> Zona 1 (norte), ~507 m",
-        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P1 a las 4 NAPs de la Zona 1 (norte de la carretera).",
+        "name": "Distribucion P1 -> Zona 1 (noroeste), ~507 m",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P1 a las 4 NAPs de la Zona 1.",
         "tipo": "distribucion"
       },
       "geometry": {
@@ -211,7 +211,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z2-A (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado sur de la carretera. Zona 2, P1. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 2 (suroeste), P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -226,7 +226,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z2-B (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado sur de la carretera. Zona 2, P1. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 2 (suroeste), P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -241,7 +241,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z2-C (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado sur de la carretera. Zona 2, P1. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 2 (suroeste), P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -256,7 +256,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z2-D (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado sur de la carretera. Zona 2, P1. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 2 (suroeste), P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -270,8 +270,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Distribucion P1 -> Zona 2 (sur), ~449 m",
-        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P1 a las 4 NAPs de la Zona 2 (sur de la carretera).",
+        "name": "Distribucion P1 -> Zona 2 (suroeste), ~449 m",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P1 a las 4 NAPs de la Zona 2.",
         "tipo": "distribucion"
       },
       "geometry": {
@@ -308,7 +308,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z3-A (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado norte de la carretera. Zona 3, P2. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 3 (norte-centro), P2. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -323,7 +323,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z3-B (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado norte de la carretera. Zona 3, P2. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 3 (norte-centro), P2. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -338,7 +338,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z3-C (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado norte de la carretera. Zona 3, P2. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 3 (norte-centro), P2. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -352,23 +352,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "NAP Z3-D (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado norte de la carretera. Zona 3, P2. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -96.3269958,
-          18.6245476
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Distribucion P2 -> Zona 3 (norte), ~580 m",
-        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 4 NAPs de la Zona 3 (norte de la carretera).",
+        "name": "Distribucion P2 -> Zona 3 (norte-centro), ~475 m",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 3 NAPs de la Zona 3.",
         "tipo": "distribucion"
       },
       "geometry": {
@@ -401,10 +386,6 @@
           [
             -96.3260825,
             18.6241765
-          ],
-          [
-            -96.3269958,
-            18.6245476
           ]
         ]
       }
@@ -413,7 +394,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z4-A (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado sur de la carretera. Zona 4, P2. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 4 (sureste), P2. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -428,22 +409,7 @@
       "type": "Feature",
       "properties": {
         "name": "NAP Z4-B (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado sur de la carretera. Zona 4, P2. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -96.3238804,
-          18.6189507
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z4-C (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado sur de la carretera. Zona 4, P2. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 4 (sureste), P2. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
@@ -457,23 +423,23 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "NAP Z4-D (1:16, 16 clientes)",
-        "description": "Caja NAP 1:16 en esquina real (OSM), lado sur de la carretera. Zona 4, P2. Ocupacion: 0/16.",
+        "name": "NAP Z4-C (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 4 (sureste), P2. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -96.3231683,
-          18.6208189
+          -96.3238804,
+          18.6189507
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "Distribucion P2 -> Zona 4 (sur), ~656 m",
-        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 4 NAPs de la Zona 4 (sur de la carretera).",
+        "name": "Distribucion P2 -> Zona 4 (sureste), ~435 m",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 3 NAPs de la Zona 4.",
         "tipo": "distribucion"
       },
       "geometry": {
@@ -514,14 +480,97 @@
           [
             -96.3238804,
             18.6189507
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z5-A (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 5 (noreste (Benito Juarez / Zaragoza)), P2. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3216852,
+          18.6225421
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z5-B (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 5 (noreste (Benito Juarez / Zaragoza)), P2. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3223502,
+          18.622804
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Distribucion P2 -> Zona 5 (noreste (Benito Juarez / Zaragoza)), ~422 m",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 2 NAPs de la Zona 5.",
+        "tipo": "distribucion"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -96.324424,
+            18.6216
           ],
           [
-            -96.3235424,
-            18.6198809
+            -96.3244785,
+            18.6216615
           ],
           [
-            -96.3231683,
-            18.6208189
+            -96.3239421,
+            18.6215242
+          ],
+          [
+            -96.3236672,
+            18.621467
+          ],
+          [
+            -96.323358,
+            18.6214092
+          ],
+          [
+            -96.3231488,
+            18.62138
+          ],
+          [
+            -96.3229457,
+            18.6213628
+          ],
+          [
+            -96.3228934,
+            18.6214581
+          ],
+          [
+            -96.3228504,
+            18.6215452
+          ],
+          [
+            -96.32277,
+            18.6217314
+          ],
+          [
+            -96.3223502,
+            18.622804
+          ],
+          [
+            -96.3216852,
+            18.6225421
           ]
         ]
       }
