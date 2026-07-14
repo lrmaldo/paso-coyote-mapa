@@ -5,16 +5,28 @@
       "type": "Feature",
       "properties": {
         "name": "Troncal 12H (Joachin - Paso Coyote), ~1km",
-        "description": "Feeder de 12 hilos sobre la calle real (aereo). Lleva P1 y P2 activos (1 hilo c/u) + hilos de reserva hacia Joachin. El split NO se hace aqui: los splitters primarios van en campo.",
+        "description": "Ruta sobre la calle real (ya corregida en Earth). Lleva P1 y P2 activos + reservas. El split va en campo, no en la OLT.",
         "tipo": "troncal"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [-96.331173, 18.62325],
-          [-96.3287, 18.624],
-          [-96.3255, 18.6245],
-          [-96.322, 18.6252]
+          [
+            -96.331173,
+            18.62325
+          ],
+          [
+            -96.3287,
+            18.624
+          ],
+          [
+            -96.3255,
+            18.6245
+          ],
+          [
+            -96.322,
+            18.6252
+          ]
         ]
       }
     },
@@ -22,246 +34,212 @@
       "type": "Feature",
       "properties": {
         "name": "OLT (4 puertos GPON) - 2 activos aqui, 2 reservados",
-        "description": "Puerto 1 y Puerto 2: Paso Coyote (256 usuarios de capacidad). Puerto 3 y 4: reservados para continuidad a otro pueblo mas adelante.",
+        "description": "P1 y P2: Paso Coyote (256 de capacidad). P3 y P4 reservados para continuidad a otro pueblo.",
         "tipo": "OLT"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-96.331173, 18.62325]
+        "coordinates": [
+          -96.331173,
+          18.62325
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Empalme de reserva -> linea Joachin",
-        "description": "Hilos de reserva ya no salen desde la OLT: corren dentro de la troncal hasta el final del recorrido y ahi se empalman con la linea que suministra Joachin.",
+        "description": "Hilos de reserva corren dentro de la troncal hasta el final y ahi empalman con la linea de Joachin.",
         "tipo": "empalme"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-96.322, 18.6252]
+        "coordinates": [
+          -96.322,
+          18.6252
+        ]
       }
     },
-
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "REF Zona 1 (referencia de campo)",
-        "description": "Punto original del levantamiento. Colocar en la esquina de manzana mas cercana, no a mitad de cuadra.",
-        "tipo": "otro"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3287, 18.6245] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "REF Zona 2 (referencia de campo)",
-        "description": "Punto original del levantamiento. Colocar en la esquina de manzana mas cercana, no a mitad de cuadra.",
-        "tipo": "otro"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3287, 18.622] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "REF Zona 3 (referencia de campo)",
-        "description": "Punto original del levantamiento. Recorrida una calle antes segun indicacion de Helber.",
-        "tipo": "otro"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3247, 18.6253] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "REF Zona 4 (referencia de campo)",
-        "description": "Punto original del levantamiento. Recorrida una calle antes segun indicacion de Helber.",
-        "tipo": "otro"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3247, 18.6227] }
-    },
-
     {
       "type": "Feature",
       "properties": {
         "name": "Splitter primario P1 (1:8)",
-        "description": "PROPUESTA. Splitter 1:8 en cierre aereo sobre la troncal. Alimenta las 8 NAPs del Puerto 1 (Zona 1 norte + Zona 2 sur). Deja reserva de hilo en el cierre.",
+        "description": "Splitter 1:8 en cierre aereo sobre la troncal. Alimenta las 8 NAPs del P1 (norte+sur). Deja reserva de hilo.",
         "tipo": "splitter"
       },
-      "geometry": { "type": "Point", "coordinates": [-96.3287, 18.624] }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3287,
+          18.624
+        ]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Splitter primario P2 (1:8)",
-        "description": "PROPUESTA. Splitter 1:8 en cierre aereo sobre la troncal. Alimenta las 8 NAPs del Puerto 2 (Zona 3 norte + Zona 4 sur). Deja reserva de hilo en el cierre.",
+        "description": "Splitter 1:8 en cierre aereo sobre la troncal. Alimenta las 8 NAPs del P2 (norte+sur). Deja reserva de hilo.",
         "tipo": "splitter"
       },
-      "geometry": { "type": "Point", "coordinates": [-96.3247, 18.62466] }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3247,
+          18.62466
+        ]
+      }
     },
-
     {
       "type": "Feature",
       "properties": {
         "name": "NAP Z1-A (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 1 norte, P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
-      "geometry": { "type": "Point", "coordinates": [-96.3291, 18.62485] }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3293172,
+          18.6243049
+        ]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "NAP Z1-B (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 1 norte, P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
-      "geometry": { "type": "Point", "coordinates": [-96.3283, 18.62485] }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3284267,
+          18.6239287
+        ]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "NAP Z1-C (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 1 norte, P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
-      "geometry": { "type": "Point", "coordinates": [-96.3291, 18.62415] }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3279815,
+          18.6249225
+        ]
+      }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "NAP Z1-D (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 1 norte, P1. Ocupacion: 0/16.",
         "tipo": "NAP"
       },
-      "geometry": { "type": "Point", "coordinates": [-96.3283, 18.62415] }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3289404,
+          18.6252771
+        ]
+      }
     },
-
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z2-A (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3291, 18.62235] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z2-B (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3283, 18.62235] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z2-C (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3291, 18.62165] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z2-D (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3283, 18.62165] }
-    },
-
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z3-A (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3251, 18.62565] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z3-B (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3243, 18.62565] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z3-C (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3251, 18.62495] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z3-D (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3243, 18.62495] }
-    },
-
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z4-A (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3251, 18.62305] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z4-B (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3243, 18.62305] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z4-C (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3251, 18.62235] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NAP Z4-D (1:16, 16 clientes)",
-        "description": "PROPUESTA - caja NAP 1:16 en esquina. Arrastrar a la esquina real. Ocupacion: 0/16.",
-        "tipo": "NAP"
-      },
-      "geometry": { "type": "Point", "coordinates": [-96.3243, 18.62235] }
-    },
-
     {
       "type": "Feature",
       "properties": {
         "name": "Distribucion P1 -> Zona 1 (norte)",
-        "description": "PROPUESTA - ramal aereo desde el splitter primario P1 hacia las 4 NAPs de la Zona 1. Ajustar el trazo sobre la calle/posteria real.",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P1 a las 4 NAPs. Largo aprox 326 m.",
         "tipo": "distribucion"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [-96.3287, 18.624],
-          [-96.3291, 18.62415],
-          [-96.3291, 18.62485],
-          [-96.3283, 18.62485],
-          [-96.3283, 18.62415]
+          [
+            -96.3287,
+            18.624
+          ],
+          [
+            -96.3284267,
+            18.6239287
+          ],
+          [
+            -96.3293172,
+            18.6243049
+          ],
+          [
+            -96.3289404,
+            18.6252771
+          ],
+          [
+            -96.3279815,
+            18.6249225
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z2-A (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 2 sur, P1. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3292137,
+          18.6221147
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z2-B (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 2 sur, P1. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3282232,
+          18.6217356
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z2-C (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 2 sur, P1. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3300059,
+          18.6224574
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z2-D (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 2 sur, P1. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3273149,
+          18.6213997
         ]
       }
     },
@@ -269,18 +247,120 @@
       "type": "Feature",
       "properties": {
         "name": "Distribucion P1 -> Zona 2 (sur)",
-        "description": "PROPUESTA - ramal aereo desde el splitter primario P1 hacia las 4 NAPs de la Zona 2. Ajustar el trazo sobre la calle/posteria real.",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P1 a las 4 NAPs. Largo aprox 619 m.",
         "tipo": "distribucion"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [-96.3287, 18.624],
-          [-96.3287, 18.6228],
-          [-96.3291, 18.62235],
-          [-96.3291, 18.62165],
-          [-96.3283, 18.62165],
-          [-96.3283, 18.62235]
+          [
+            -96.3287,
+            18.624
+          ],
+          [
+            -96.3284267,
+            18.6239287
+          ],
+          [
+            -96.3288881,
+            18.6227926
+          ],
+          [
+            -96.3292137,
+            18.6221147
+          ],
+          [
+            -96.3299409,
+            18.6223871
+          ],
+          [
+            -96.3299908,
+            18.6224275
+          ],
+          [
+            -96.3300059,
+            18.6224574
+          ],
+          [
+            -96.3299908,
+            18.6224275
+          ],
+          [
+            -96.3299409,
+            18.6223871
+          ],
+          [
+            -96.3292137,
+            18.6221147
+          ],
+          [
+            -96.3282232,
+            18.6217356
+          ],
+          [
+            -96.3273149,
+            18.6213997
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z3-A (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 3 norte, P2. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3251464,
+          18.623836
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z3-B (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 3 norte, P2. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3260825,
+          18.6241765
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z3-C (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 3 norte, P2. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3242398,
+          18.6235068
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z3-D (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 3 norte, P2. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3269958,
+          18.6245476
         ]
       }
     },
@@ -288,17 +368,96 @@
       "type": "Feature",
       "properties": {
         "name": "Distribucion P2 -> Zona 3 (norte)",
-        "description": "PROPUESTA - ramal aereo desde el splitter primario P2 hacia las 4 NAPs de la Zona 3. Ajustar el trazo sobre la calle/posteria real.",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 4 NAPs. Largo aprox 414 m.",
         "tipo": "distribucion"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [-96.3247, 18.62466],
-          [-96.3251, 18.62495],
-          [-96.3251, 18.62565],
-          [-96.3243, 18.62565],
-          [-96.3243, 18.62495]
+          [
+            -96.3247,
+            18.62466
+          ],
+          [
+            -96.3251464,
+            18.623836
+          ],
+          [
+            -96.3242398,
+            18.6235068
+          ],
+          [
+            -96.3251464,
+            18.623836
+          ],
+          [
+            -96.3260825,
+            18.6241765
+          ],
+          [
+            -96.3269958,
+            18.6245476
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z4-A (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 4 sur, P2. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3246422,
+          18.6224469
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z4-B (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 4 sur, P2. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3256064,
+          18.6228167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z4-C (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 4 sur, P2. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3237114,
+          18.6220999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NAP Z4-D (1:16, 16 clientes)",
+        "description": "Caja NAP 1:16 en esquina real (OSM). Zona 4 sur, P2. Ocupacion: 0/16.",
+        "tipo": "NAP"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.3250512,
+          18.6215293
         ]
       }
     },
@@ -306,18 +465,52 @@
       "type": "Feature",
       "properties": {
         "name": "Distribucion P2 -> Zona 4 (sur)",
-        "description": "PROPUESTA - ramal aereo desde el splitter primario P2 hacia las 4 NAPs de la Zona 4. Ajustar el trazo sobre la calle/posteria real.",
+        "description": "Ramal aereo ruteado sobre calles reales (OSM) desde el splitter P2 a las 4 NAPs. Largo aprox 545 m.",
         "tipo": "distribucion"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [-96.3247, 18.62466],
-          [-96.3247, 18.6235],
-          [-96.3251, 18.62305],
-          [-96.3251, 18.62235],
-          [-96.3243, 18.62235],
-          [-96.3243, 18.62305]
+          [
+            -96.3247,
+            18.62466
+          ],
+          [
+            -96.3251464,
+            18.623836
+          ],
+          [
+            -96.3256064,
+            18.6228167
+          ],
+          [
+            -96.3246422,
+            18.6224469
+          ],
+          [
+            -96.3237114,
+            18.6220999
+          ],
+          [
+            -96.3239421,
+            18.6215242
+          ],
+          [
+            -96.3244785,
+            18.6216615
+          ],
+          [
+            -96.3249546,
+            18.6217727
+          ],
+          [
+            -96.3249962,
+            18.6216643
+          ],
+          [
+            -96.3250512,
+            18.6215293
+          ]
         ]
       }
     }
