@@ -5,16 +5,27 @@
       "type": "Feature",
       "properties": {
         "name": "Troncal 12H (Joachin - Paso Coyote), ~1km",
-        "description": "Ruta sobre la calle real (ya corregida en Earth). Puerto 1 y Puerto 2 de la OLT viajan dentro de este mismo cable hasta sus respectivas zonas.",
-        "tipo": "troncal"
+        "description": "Ruta sobre la calle real (ya corregida en Earth). Puerto 1 y Puerto 2 de la OLT viajan dentro de este mismo cable hasta sus respectivas zonas."
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [-96.331173, 18.62325],
-          [-96.3287, 18.624],
-          [-96.3255, 18.6245],
-          [-96.322, 18.6252]
+          [
+            -96.331173,
+            18.62325
+          ],
+          [
+            -96.3287,
+            18.624
+          ],
+          [
+            -96.3255,
+            18.6245
+          ],
+          [
+            -96.322,
+            18.6252
+          ]
         ]
       }
     },
@@ -22,72 +33,84 @@
       "type": "Feature",
       "properties": {
         "name": "OLT (4 puertos GPON) - 2 activos aqui, 2 reservados",
-        "description": "Puerto 1 y Puerto 2: Paso Coyote (256 usuarios de capacidad). Puerto 3 y 4: reservados para continuidad a otro pueblo mas adelante.",
-        "tipo": "OLT"
+        "description": "Puerto 1 y Puerto 2: Paso Coyote (256 usuarios de capacidad). Puerto 3 y 4: reservados para continuidad a otro pueblo mas adelante."
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-96.331173, 18.62325]
+        "coordinates": [
+          -96.331173,
+          18.62325
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Zona 1 - NAP en esquina (Puerto 1, 1:16, ~50-64 clientes)",
-        "description": "Colocar en la esquina de manzana mas cercana a este punto, no a mitad de cuadra.",
-        "tipo": "NAP"
+        "description": "Colocar en la esquina de manzana mas cercana a este punto, no a mitad de cuadra."
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-96.3287, 18.6245]
+        "coordinates": [
+          -96.3287,
+          18.6245
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Zona 2 - NAP en esquina (Puerto 1, 1:16, ~50-64 clientes)",
-        "description": "Colocar en la esquina de manzana mas cercana a este punto, no a mitad de cuadra.",
-        "tipo": "NAP"
+        "description": "Colocar en la esquina de manzana mas cercana a este punto, no a mitad de cuadra."
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-96.3287, 18.622]
+        "coordinates": [
+          -96.3287,
+          18.622
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Zona 3 - NAP en esquina (Puerto 2, 1:16, ~50-64 clientes)",
-        "description": "Recorrida una calle antes segun indicacion de Helber. Colocar en la esquina de manzana mas cercana.",
-        "tipo": "NAP"
+        "description": "Recorrida una calle antes segun indicacion de Helber. Colocar en la esquina de manzana mas cercana."
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-96.3247, 18.6253]
+        "coordinates": [
+          -96.3247,
+          18.6253
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Zona 4 - NAP en esquina (Puerto 2, 1:16, ~50-64 clientes)",
-        "description": "Recorrida una calle antes segun indicacion de Helber. Colocar en la esquina de manzana mas cercana.",
-        "tipo": "NAP"
+        "description": "Recorrida una calle antes segun indicacion de Helber. Colocar en la esquina de manzana mas cercana."
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-96.3247, 18.6227]
+        "coordinates": [
+          -96.3247,
+          18.6227
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Empalme de reserva -> linea Joachin",
-        "description": "Hilos de reserva ya no salen desde la OLT: corren dentro de la troncal hasta el final del recorrido y ahi se empalman con la linea que suministra Joachin.",
-        "tipo": "empalme"
+        "description": "Hilos de reserva ya no salen desde la OLT: corren dentro de la troncal hasta el final del recorrido y ahi se empalman con la linea que suministra Joachin."
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-96.322, 18.6252]
+        "coordinates": [
+          -96.322,
+          18.6252
+        ]
       }
     }
   ]
